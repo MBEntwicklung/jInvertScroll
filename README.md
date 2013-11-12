@@ -1,3 +1,15 @@
+jInvertScroll by MBEntwicklung
+=============
+
+Advanced jInvertScroll of pixxelfactory. New event "scrollTo" available.
+
+Example
+-------
+
+    ```$(window).trigger( "scrollTo", 2000 );
+
+
+
 jInvertScroll
 =============
 
