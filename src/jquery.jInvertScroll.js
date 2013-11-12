@@ -90,19 +90,29 @@
         $(window).on('scroll resize', function (e) {
             var currY = $(this).scrollTop();
             
-            // Current percentual position
-            var scrollPercent = (currY / (totalHeight - winHeight)).toFixed(4);
-            
-            // Call the onScroll callback
-            if(typeof config.onScroll === 'function') {
-                config.onScroll.call(this, scrollPercent);
-            }
-            
-            // do the position calculation for each element
-            $.each(elements, function (i, el) {
-                var pos = Math.floor((el.width - winWidth) * scrollPercent) * -1;
-                el.el.css('left', pos);
-            });
+			scrollTo(currY, config, elements, totalHeight, winHeight, winWidth);
+        });
+
+        $(window).on('scrollTo', function (e, currY) {
+            scrollTo(currY, config, elements, totalHeight, winHeight, winWidth);
         });
     };
+
+	function scrollTo(newPosition, config, elements, totalHeight, winHeight, winWidth) {
+		// Current percentual position
+		var scrollPercent = (newPosition / (totalHeight - winHeight)).toFixed(4);
+
+		// Call the onScroll callback
+		if(typeof config.onScroll === 'function') {
+			config.onScroll.call(this, scrollPercent);
+		}
+
+		// do the position calculation for each element
+		$.each(elements, function (i, el) {
+			var pos = Math.floor((el.width - winWidth) * scrollPercent) * -1;
+			el.el.css('left', pos);
+		});
+	}
 }(jQuery));
+
+
